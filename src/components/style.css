@@ -1,0 +1,299 @@
+/*global*/
+body{
+    font-family: 'Alegreya', sans-serif;
+}
+hr{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+a{
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+ol {
+    list-style-type: none;
+}
+
+ul.no-bullets li
+{
+    list-style-type: none;
+}
+/*
+ border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+*/
+.tittle-page{
+    display: block;
+    text-align: center;
+}
+.bottom-hr{
+    position: relative;
+    bottom:1px;
+}
+
+.main-div-page{
+    margin-left: 150px;
+    margin-right: 150px;
+}
+/*side bar*/
+.sidenav{
+    background-color:rgba(214, 210, 210, 0.945);
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:1000;
+}
+
+.sidenav-content{
+    position: relative;
+    top: 10%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 30px;
+    color: #3a3939;
+    display: block;
+    transition: 0.3s;
+  }
+.sidenav a:hover {
+    color: #b6aeaeda;
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    font-size: 39px;
+    margin-left: 0px; /*margin-left: 50px*/
+  }
+#openNav{
+    position: fixed;
+    text-decoration: none;
+    margin-left: 20px;
+    top: 20px;
+    color: grey;
+} 
+
+#michal{
+    position: relative;
+    top: 13px;
+    margin-left: 40px;
+    font-size: 25px;
+}
+
+/*home photo*/
+.home-slide{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/* photos */
+.main-photos, .text, .publications{
+    margin-top: 50px;
+    width: 100%;
+    display:grid;
+    grid-template-columns: 300px 300px;
+    grid-gap: 100px;
+    padding-top: 50px;
+    justify-content: center;
+}
+.photo{
+    width: 100%;
+    max-width: 300px;
+}
+
+.AlbumHide{
+    display: none;
+}
+/*photo detail -album*/
+.album-web{
+    margin: 80px 150px 0px 150px;
+}
+#album-tittle{
+    display: block;
+    text-align: center;
+}
+.album{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.album-detail{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-gap: 15px;
+    padding: 30px;
+}
+
+.album-photo{
+    width: 100%;
+    max-width: 100px;
+    cursor: pointer;
+    align-items: center;
+    justify-items: center;
+}
+
+.album-text{
+    padding-top:30px;
+    width: 400px;
+}
+
+/*films main */
+.films{
+    display: grid;
+    grid-template-columns: 300px 300px;
+    grid-gap: 100px;
+    padding: 30px;
+    margin-top: 50px;
+    justify-content: center;
+}
+.films-img{
+    width: 100%;
+    max-width: 300px;
+}
+
+/*films detail*/
+.film-detail{
+    display: flex;
+    justify-content: center;
+    padding: 70px;
+}
+
+/* Publications */
+.publications a{
+    text-decoration: none;
+    color: black;
+}
+
+
+/*About*/
+.about-container{
+    width: 100%;
+    max-width: fit-content;
+    margin: 40px 150px 0px 150px;
+}
+.about{
+    display: flex;
+    margin: 50px 0px 40px 0px;
+}
+.about img{
+    width: 100%;
+    max-width: 500px;
+
+}
+/*Contact*/
+
+.contact{
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    justify-content: center;
+    text-align: center;
+
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+
+#contact{
+    padding: 80px;
+}
+.adress{
+    grid-column-start: 2;
+}
+
+
+/*mobile*/
+@media (max-width:600px){
+    .sidenav-content{
+        top: 0%;
+        margin-top: 20px;
+    }
+
+    #contactSideBar{
+        padding-top: 0%;
+        text-align: center;
+    }
+    .main-div-page{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .home-slide{
+        margin-top: 90px;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .main-photos, .text, .publications{
+        grid-template-columns: 250px;
+    }
+    .photo{
+        max-width: 250px;
+    }
+
+    /*album*/
+
+    .album-web{
+        margin: 0%;
+    }
+
+    .album{
+        display: block;
+    }
+
+    .album-detail{
+        grid-template-columns: 100px 100px;
+    }
+
+    .album-text{
+        width: 300px;
+    }
+
+    .films{
+        grid-template-columns: 250px;
+        margin-top: 70px;
+    }
+
+    .film-detail{
+        display: block;
+        padding: 9px;
+    }
+
+    /**about*/
+
+    .about-container{
+        margin: 0%;
+    }
+
+    .about{
+        display: block;
+    }
+
+    .about img{
+        max-width: 300px;
+    }
+
+    .contact{
+        display: block;
+    }
+
+    #contact{
+        padding: 0%;
+        margin-top: 90px;
+    }
+
+}
