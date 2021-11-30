@@ -9,6 +9,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ```npm i react-paginate```
 
+```npm i react-admin @material-ui/core```
+
 ## Available Scripts
 
 In the project directory, you can run:

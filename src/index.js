@@ -16,7 +16,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import SideBar from './components/SideBar';
 
-
+import Test from './components/test';
 
 import reportWebVitals from './reportWebVitals';
 import {
@@ -48,6 +48,7 @@ ReactDOM.render(
         <Route exact path='/test' component={SideBar} />
         <Route exact path='/about' component={About}/>
         <Route exact path='/contact' component={Contact}/>
+        <Route exact path='/ts' component={Test}/>
         </Switch>
       </Router>
     </SimpleReactLightbox>
