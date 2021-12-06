@@ -15,6 +15,7 @@ import PublicationsDetail from './components/PublicationsDetail';
 import About from './components/About';
 import Contact from './components/Contact';
 import SideBar from './components/SideBar';
+import AdminApp from './components/Admin/Admin';
 
 import Test from './components/test';
 
@@ -26,6 +27,7 @@ import {
   Route,
   browserHistory,
 } from 'react-router-dom';
+
 
 
 
@@ -48,7 +50,7 @@ ReactDOM.render(
         <Route exact path='/test' component={SideBar} />
         <Route exact path='/about' component={About}/>
         <Route exact path='/contact' component={Contact}/>
-        <Route exact path='/ts' component={Test}/>
+        <Route exact path='/admin' component={AdminApp}/>
         </Switch>
       </Router>
     </SimpleReactLightbox>

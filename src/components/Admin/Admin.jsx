@@ -1,12 +1,18 @@
 import * as React from "react";
-import { Admin } from 'react-admin';
-import dataProvider from "./dataProvider";
+import { 
+    Admin,
+    Resource,
+    ListGuesser,
+ } from 'react-admin';
+import jsonServerProvider from 'ra-data-simple-rest';
 
 
-function AdminApp () {
-    return(
-        <Admin dataProvider={dataProvider   }/>
-    )
-}
+const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com')
+
+const AdminApp = () => (
+    <Admin dataProvider={dataProvider}>
+        <Resource name="posts" list={ListGuesser} />
+    </Admin>
+);
 
 export default AdminApp;
