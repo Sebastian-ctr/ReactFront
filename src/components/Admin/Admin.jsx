@@ -1,17 +1,21 @@
 import * as React from "react";
 import { 
+    fetchUtils,
     Admin,
     Resource,
     ListGuesser,
  } from 'react-admin';
-import jsonServerProvider from 'ra-data-simple-rest';
+
+import TextList, { TextEdit, TextCreate }  from "./text";
+import MyDataProvider from "./dataProvider";
 
 
-const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com')
+
 
 const AdminApp = () => (
-    <Admin dataProvider={dataProvider}>
-        <Resource name="posts" list={ListGuesser} />
+    <Admin dataProvider={MyDataProvider}>
+        <Resource name="text" list={TextList} edit={TextEdit} create={TextCreate} />
+        <Resource name="home" list={ListGuesser} />
     </Admin>
 );
 
