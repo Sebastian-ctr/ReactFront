@@ -106,7 +106,7 @@ const dataProvider = {
 const myDataProvider = {
   ...dataProvider,
   update: (resource, params) => {
-    if (resource !== 'posts' || !params.data.pictures) {
+    if (resource !== 'text' || !params.data.pictures) {
         // fallback to the default implementation
         return dataProvider.update(resource, params);
     }

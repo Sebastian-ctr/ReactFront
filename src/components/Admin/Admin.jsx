@@ -8,6 +8,9 @@ import {
 
 import TextList, { TextEdit, TextCreate }  from "./text";
 import MyDataProvider from "./dataProvider";
+import ContactList, { ContactEdit, ContactCreate } from "./contact";
+import FilmList, { FilmCreate, FilmEdit } from "./film";
+import MusicList, { MusicCreate, MusicEdit } from "./music";
 
 
 
@@ -15,7 +18,9 @@ import MyDataProvider from "./dataProvider";
 const AdminApp = () => (
     <Admin dataProvider={MyDataProvider}>
         <Resource name="text" list={TextList} edit={TextEdit} create={TextCreate} />
-        <Resource name="home" list={ListGuesser} />
+        <Resource name="contact" list={ContactList} edit={ContactEdit} create={ContactCreate} />
+        <Resource name="film" list={FilmList} edit={FilmEdit} create={FilmCreate} />
+        <Resource name="music" list={MusicList} edit={MusicEdit} create={MusicCreate} />
     </Admin>
 );
 
