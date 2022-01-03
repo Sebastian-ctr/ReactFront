@@ -3,6 +3,8 @@ import { stringify } from 'query-string';
 
 const apiUrl = 'http://localhost:5000';
 const httpClient = fetchUtils.fetchJson;
+const countHeader = 'Content-Range';
+
 
 
 
@@ -11,6 +13,10 @@ const dataProvider = {
   getList: (resource, params) => {
       const { page, perPage } = params.pagination;
       const { field, order } = params.sort;
+
+      const rangeStart = (page - 1) * perPage;
+      const rangeEnd = page * perPage - 1;
+
       const query = {
           sort: JSON.stringify([field, order]),
           range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
@@ -18,10 +24,41 @@ const dataProvider = {
       };
       const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-      return httpClient(url).then(({ headers, json }) => ({ 
+      const options =
+            countHeader === 'Content-Range'
+                ? {
+                      // Chrome doesn't return `Content-Range` header if no `Range` is provided in the request.
+                      headers: new Headers({
+                          Range: `${resource}=${rangeStart}-${rangeEnd}`,
+                      }),
+                  }
+                : {};
+
+        return httpClient(url, options).then(({ headers, json }) => {
+            if (!headers.has(countHeader)) {
+                throw new Error(
+                    `The ${countHeader} header is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare ${countHeader} in the Access-Control-Expose-Headers header?`
+                );
+            }
+            return {
+                data: json.map(resource => ({ ...resource, id: resource._id }) ),
+                total:
+                    countHeader === 'Content-Range'
+                        ? parseInt(
+                              headers.get('content-range').split('/').pop(),
+                              10
+                          )
+                        : parseInt(headers.get(countHeader.toLowerCase())),
+            };
+        });
+
+
+
+
+      /*return httpClient(url).then(({ headers, json }) => ({ 
            data: json.map(resource => ({ ...resource, id: resource._id }) ),
           total: parseInt(headers.get('content-range').split('/').pop(), 10),
-      }));
+      }));*/
   },
   getOne: (resource, params) =>
       httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
@@ -46,7 +83,7 @@ const dataProvider = {
           range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
           filter: JSON.stringify({
               ...params.filter,
-              [params.target]: params.id,
+              [params.target]: params._id,
           }),
       };
       const url = `${apiUrl}/${resource}?${stringify(query)}`;
@@ -160,4 +197,4 @@ new Promise((resolve, reject) => {
 });
 
 
-export default myDataProvider;
+export default dataProvider;

@@ -5,9 +5,8 @@ import {
     Resource,
     ListGuesser,
  } from 'react-admin';
-
+import dataProvider from "./DataProvider";
 import TextList, { TextEdit, TextCreate }  from "./text";
-import MyDataProvider from "./dataProvider";
 import ContactList, { ContactEdit, ContactCreate } from "./contact";
 import FilmList, { FilmCreate, FilmEdit } from "./film";
 import MusicList, { MusicCreate, MusicEdit } from "./music";
@@ -16,7 +15,7 @@ import MusicList, { MusicCreate, MusicEdit } from "./music";
 
 
 const AdminApp = () => (
-    <Admin dataProvider={MyDataProvider}>
+    <Admin dataProvider={dataProvider}>
         <Resource name="text" list={TextList} edit={TextEdit} create={TextCreate} />
         <Resource name="contact" list={ContactList} edit={ContactEdit} create={ContactCreate} />
         <Resource name="film" list={FilmList} edit={FilmEdit} create={FilmCreate} />
