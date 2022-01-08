@@ -3,43 +3,21 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import './style.css';
 import { Carousel } from 'react-responsive-carousel';
 import er from "simple-react-lightbox";
+import useFetch from '../hooks/useFetch';
 
 let size = 400;
 
 function CarouselComponent(props){
-    const [isLoading, setLoading] = useState(true);
-    const [photo, setPhoto] = useState([])
-    
-
-    useEffect(() => {
-        fetch("http://localhost:1337/api/home-page?populate=image")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setPhoto(result);
-            },   
-            
-        )
-        .catch(error => {
-            throw(error)
-        })
-        .finally(() => setLoading(false));
-    }, [setPhoto])
-
-
-    /*useEffect(() => {
-        loadData();
-        return () => {};
-    }, [])*/
-
-
-    console.log(photo.data)
-    const img = photo.data.attributes.image.data
+    const { loading, error, data } = useFetch('http://localhost:1337/api/home-page?populate=image')
+    if (loading) return <p>loading...</p>
+    if (error) return <p>error</p>
+    console.log(data)
+    const img = data.data.attributes.image.data
     
     
         return(
             <div className='home-slide'>
-                {isLoading? <p>Loading...</p> :
+                
                 <Carousel 
                         showArrows={true}
                         renderArrowNext={props.renderArrowNext}
@@ -63,7 +41,7 @@ function CarouselComponent(props){
                         ))}
                         
                     
-                </Carousel>}
+                </Carousel>
                 {changeWidthSize()}
             </div>
         )
