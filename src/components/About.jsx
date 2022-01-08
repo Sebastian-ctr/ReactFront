@@ -7,7 +7,7 @@ function About(){
     const [about, setAbout] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:8000/about/")
+        fetch("http://localhost:1337/api/about?populate=image")
         .then(res => res.json())
         .then(
             (result) => {
@@ -17,11 +17,11 @@ function About(){
     }, [])
 
     let aboutArray = about.map(a => (
-        a.content
+        a.description
     ))
 
-    let photoArray = about.map(a => (
-        a.image
+    let photo = about.map(a => (
+        a.url
     ))
 
     return(
@@ -34,7 +34,7 @@ function About(){
                         {aboutArray[0]}
                     </div>
                     <div>
-                        <img src={`http://localhost:8000/${photoArray[0]}/`} alt=''/>
+                        <img src={`http://localhost:1337/${photo}}/`} alt=''/>
                     </div>
                 </div>
                 <hr className='bottom-hr'/>

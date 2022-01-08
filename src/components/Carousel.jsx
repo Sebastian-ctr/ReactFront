@@ -7,10 +7,12 @@ import er from "simple-react-lightbox";
 let size = 400;
 
 function CarouselComponent(props){
+    const [isLoading, setLoading] = useState(true);
     const [photo, setPhoto] = useState([])
+    
 
     useEffect(() => {
-        fetch("http://localhost:8000/home/")
+        fetch("http://localhost:1337/api/home-page?populate=image")
         .then(res => res.json())
         .then(
             (result) => {
@@ -18,12 +20,26 @@ function CarouselComponent(props){
             },   
             
         )
-            .catch(error => {
-                throw(error)
-            })
-    }, [])
+        .catch(error => {
+            throw(error)
+        })
+        .finally(() => setLoading(false));
+    }, [setPhoto])
+
+
+    /*useEffect(() => {
+        loadData();
+        return () => {};
+    }, [])*/
+
+
+    console.log(photo.data)
+    const img = photo.data.attributes.image.data
+    
+    
         return(
             <div className='home-slide'>
+                {isLoading? <p>Loading...</p> :
                 <Carousel 
                         showArrows={true}
                         renderArrowNext={props.renderArrowNext}
@@ -40,13 +56,14 @@ function CarouselComponent(props){
                         width={size}
                         >
                     
-                        {photo.map(p => (
-                            <div key={p.id}>
-                                    <img src={"http://localhost:8000/" + p.image} alt="photo"/>
+                        {img.map(i => (
+                            <div key={i.id}>
+                                    <img src={"http://localhost:1337" + i.attributes.url} alt="photo"/>
                             </div>
                         ))}
+                        
                     
-                </Carousel>
+                </Carousel>}
                 {changeWidthSize()}
             </div>
         )
