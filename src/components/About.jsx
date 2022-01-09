@@ -1,28 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import SideBar from './SideBar';
+import useFetch from '../hooks/useFetch';
 
 
 
 function About(){
-    const [about, setAbout] = useState([])
-
-    useEffect(() => {
-        fetch("http://localhost:1337/api/about?populate=image")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setAbout(result);
-            },
-        )
-    }, [])
-
-    let aboutArray = about.map(a => (
-        a.description
-    ))
-
-    let photo = about.map(a => (
-        a.url
-    ))
+    const { loading, error, data } = useFetch('http://localhost:1337/api/about?populate=image')
+    if (loading) return <p>loading...</p>
+    if (error) return <p>error</p>
+    const img = data.data.attributes.image.data.attributes.url
+    console.log(img)
 
     return(
         <section>
@@ -31,10 +18,10 @@ function About(){
                 <hr/>
                 <div className='about'>
                     <div>
-                        {aboutArray[0]}
+                        {data.data.attributes.description}
                     </div>
                     <div>
-                        <img src={`http://localhost:1337/${photo}}/`} alt=''/>
+                        <img src={'http://localhost:1337' + img } alt=''/>
                     </div>
                 </div>
                 <hr className='bottom-hr'/>

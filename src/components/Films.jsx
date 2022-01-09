@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import SideBar from './SideBar';
 import { Link } from 'react-router-dom'
+import useFetch from '../hooks/useFetch';
 
 
 function Films(){
-    const [film, setFilm] = useState([])
-
-    useEffect(() => {
-        fetch("http://localhost:8000/film/")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setFilm(result);
-            },
-        )
-    }, [])
+    const { loading, error, data } = useFetch('http://localhost:1337/api/films')
+    if (loading) return <p>loading...</p>
+    if (error) return <p>error</p>
+    const movie = data.data
+    console.log(movie)
 
     return(
         <section>
             <SideBar />
             <div className='films'>
-                {film.map(s => (
-                    <Link to={`/film/${s.id}`} key={s.id}>
-                        <img className='films-img' src={`https://img.youtube.com/vi/${s.url}/mqdefault.jpg`} alt=''/>
+                {movie.map(m => (
+                    <Link to={`/film/${m.id}`} key={m.id}>
+                        <img className='films-img' src={`https://img.youtube.com/vi/${m.attributes.url}/mqdefault.jpg`} alt=''/>
                     </Link>
                 ))}
             </div>

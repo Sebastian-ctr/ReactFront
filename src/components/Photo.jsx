@@ -3,33 +3,25 @@ import SideBar from './SideBar';
 import './style.css';
 import { Link } from 'react-router-dom';
 import PhotoDetail from './PhotoDetail';
+import useFetch from '../hooks/useFetch';
 
 function Photo() {
-    const [source, setSource] = useState([])
-
-
-    useEffect(() => {
-        fetch("http://localhost:8000/photo/")
-        .then(res => res.json())
-        .then(
-            (source) => {
-                setSource(source);
-            },
-        )
-
-    }, [])
-
+    const { loading, error, data } = useFetch('http://localhost:1337/api/home-page?populate=image')
+    if (loading) return <p>loading...</p>
+    if (error) return <p>error</p>
+    const img = data.data
+    console.log(img)
         return(
             <section>
                 <SideBar />
                 <div className="main-photos">
-
-                    {source.map(s => (
-                        <Link to={'/photo/' + s.id} key={s.id}>
-                            <img className='photo' src={"http://localhost:8000/" + s.image} />
+                    
+                    {img.map(i => (
+                        <Link to={'/photo/' + i.id} key={i.id}>
+                            <img className='photo' src={"http://localhost:1337" + i.attributes.image.data.attributes.url} />
                         </Link>
                     ))}
-                
+                    
                 </div>
             </section>
         )
