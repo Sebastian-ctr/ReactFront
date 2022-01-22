@@ -18,9 +18,9 @@ function Publications(){
             <div className='publications'>
             
                 {publication.map(p => (
-                    <Link to={`http://localhost:1337${p.attributes.text.data.attributes.url}`} key={p.id} target="_blank" rel="noopener noreferrer">
-                        <p> link</p>
-                    </Link>
+                    <a href={`http://localhost:1337${p.attributes.text.data.attributes.url}`}  target="_blank" rel="noopener noreferrer">
+                         link
+                    </a>
                 ))}
             </div>
         </section>
