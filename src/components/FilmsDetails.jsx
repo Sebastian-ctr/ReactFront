@@ -9,7 +9,7 @@ let sizeHeight = '315';
 
 function FilmsDetail() {
     let { id } = useParams()
-    const { loading, error, data } = useFetch(`http://localhost:1337/api/films/${id}`)
+    const { loading, error, data } = useFetch(`https://apiportfoliostrapi.herokuapp.com/api/films/${id}`)
     if (loading) return <p>loading...</p>
     if (error) return <p>error</p>
     const movie = data.data.attributes

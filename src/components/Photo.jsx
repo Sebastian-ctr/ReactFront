@@ -6,7 +6,7 @@ import PhotoDetail from './PhotoDetail';
 import useFetch from '../hooks/useFetch';
 
 function Photo() {
-    const { loading, error, data } = useFetch('http://localhost:1337/api/photos?populate=image')
+    const { loading, error, data } = useFetch('https://apiportfoliostrapi.herokuapp.com/api/photos?populate=image')
     if (loading) return <p>loading...</p>
     if (error) return <p>error</p>
     const img = data.data
@@ -20,7 +20,7 @@ function Photo() {
                     
                     {img.map(i => (
                         <Link to={'/photo/' + i.id} key={i.id}>
-                            <img className='photo' src={"http://localhost:1337" + i.attributes.image.data[0].attributes.url} />
+                            <img className='photo' src={"https://apiportfoliostrapi.herokuapp.com" + i.attributes.image.data[0].attributes.url} />
                         </Link>
                     ))}
                     

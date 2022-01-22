@@ -6,7 +6,7 @@ import useFetch from "../hooks/useFetch";
 
 function TextDetail(){
     let { id } = useParams()
-    const { loading, error, data } = useFetch(`http://localhost:1337/api/texts/${id}`)
+    const { loading, error, data } = useFetch(`https://apiportfoliostrapi.herokuapp.com/api/texts/${id}`)
     if (loading) return <div className='loading'>loading...</div>
     if (error) return <p className='loading'>error</p>
     const text = data.data

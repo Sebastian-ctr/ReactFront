@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 
 
 function Films(){
-    const { loading, error, data } = useFetch('http://localhost:1337/api/films')
+    const { loading, error, data } = useFetch('https://apiportfoliostrapi.herokuapp.com/api/films')
     if (loading) return <p>loading...</p>
     if (error) return <p>error</p>
     const movie = data.data

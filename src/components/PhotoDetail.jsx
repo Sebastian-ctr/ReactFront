@@ -17,7 +17,7 @@ function PhotoDetail(props){
     let { id } = useParams()
 
 
-    const { loading, error, data } = useFetch(`http://localhost:1337/api/photos/${id}?populate=image`)
+    const { loading, error, data } = useFetch(`https://apiportfoliostrapi.herokuapp.com/api/photos/${id}?populate=image`)
     if (loading) return <p>loading...</p>
     if (error) return <p>error</p>
     const img = data.data
@@ -63,7 +63,7 @@ function PhotoDetail(props){
                         <div className='album-detail'>
                             {img.attributes.image.data.map(i => (
                                 <img className='album-photo'
-                                src={`http://localhost:1337${i.attributes.url}`} alt=''/>
+                                src={`https://apiportfoliostrapi.herokuapp.com${i.attributes.url}`} alt=''/>
                             ))}
                             
                         </div>

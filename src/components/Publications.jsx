@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
 function Publications(){
-    const { loading, error, data } = useFetch('http://localhost:1337/api/publications?populate=text')
+    const { loading, error, data } = useFetch('https://apiportfoliostrapi.herokuapp.com/api/publications?populate=text')
     if (loading) return <p>loading...</p>
     if (error) return <p>error</p>
     const publication = data.data
@@ -18,8 +18,8 @@ function Publications(){
             <div className='publications'>
             
                 {publication.map(p => (
-                    <a href={`http://localhost:1337${p.attributes.text.data.attributes.url}`}  target="_blank" rel="noopener noreferrer">
-                         link
+                    <a href={`https://apiportfoliostrapi.herokuapp.com${p.attributes.text.data.attributes.url}`}  target="_blank" rel="noopener noreferrer">
+                        {p.attributes.title}
                     </a>
                 ))}
             </div>

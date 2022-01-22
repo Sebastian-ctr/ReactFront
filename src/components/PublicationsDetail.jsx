@@ -15,7 +15,7 @@ function PublicationsDetail(){
     let { id } = useParams()
 
     useEffect(() => {
-        fetch(`http://localhost:8000/publication/${id}/`)
+        fetch(`https://apiportfoliostrapi.herokuapp.com/publication/${id}/`)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -41,7 +41,7 @@ function PublicationsDetail(){
                         <div className='album-detail'>
                             {publications.map(p => (
                                 <img className='album-photo'
-                                     src={`http://localhost:8000/${p.image}/`} alt=''/>
+                                     src={`https://apiportfoliostrapi.herokuapp.com/${p.image}/`} alt=''/>
                             ))}
 
                         </div>

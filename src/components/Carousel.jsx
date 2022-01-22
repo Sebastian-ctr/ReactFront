@@ -8,7 +8,7 @@ import useFetch from '../hooks/useFetch';
 let size = 400;
 
 function CarouselComponent(props){
-    const { loading, error, data } = useFetch('http://localhost:1337/api/home-page?populate=image')
+    const { loading, error, data } = useFetch('https://apiportfoliostrapi.herokuapp.com/api/home-page?populate=image')
     if (loading) return <p>loading...</p>
     if (error) return <p>error</p>
     console.log(data)
@@ -36,7 +36,7 @@ function CarouselComponent(props){
                     
                         {img.map(i => (
                             <div key={i.id}>
-                                    <img src={"http://localhost:1337" + i.attributes.url} alt="photo"/>
+                                    <img src={"https://apiportfoliostrapi.herokuapp.com" + i.attributes.url} alt="photo"/>
                             </div>
                         ))}
                         

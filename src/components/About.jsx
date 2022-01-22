@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 
 
 function About(){
-    const { loading, error, data } = useFetch('http://localhost:1337/api/about?populate=image')
+    const { loading, error, data } = useFetch('https://apiportfoliostrapi.herokuapp.com/api/about?populate=image')
     if (loading) return <p>loading...</p>
     if (error) return <p>error</p>
     const img = data.data.attributes.image.data.attributes.url

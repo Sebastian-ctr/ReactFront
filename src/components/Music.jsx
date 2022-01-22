@@ -6,7 +6,7 @@ import useFetch from '../hooks/useFetch';
 
 
 function Music(){
-    const { loading, error, data } = useFetch('http://localhost:1337/api/musics')
+    const { loading, error, data } = useFetch('https://apiportfoliostrapi.herokuapp.com/api/musics')
     if (loading) return <p>loading...</p>
     if (error) return <p>error</p>
     const music = data.data
