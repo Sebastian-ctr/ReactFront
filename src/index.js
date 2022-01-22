@@ -16,6 +16,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import SideBar from './components/SideBar';
 import AdminApp from './components/Admin/Admin';
+import TextDetail from './components/TextDetail';
 
 import Test from './components/test';
 
@@ -45,6 +46,7 @@ ReactDOM.render(
         <Route exact path='/music' component={Music}/>
         <Route exact path='/music/:id' component={MusicDetails}/>
         <Route exact path='/text' component={Text}/>
+        <Route exact path='/text/:id' component={TextDetail}/>
         <Route exact path='/publications' component={Publications}/>
         <Route exact path='/publications/:id' component={PublicationsDetail}/>
         <Route exact path='/test' component={SideBar} />

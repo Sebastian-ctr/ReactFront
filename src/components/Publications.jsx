@@ -1,22 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import SideBar from './SideBar';
 import { Link } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
 
 function Publications(){
+    const { loading, error, data } = useFetch('http://localhost:1337/api/publications?populate=text')
+    if (loading) return <p>loading...</p>
+    if (error) return <p>error</p>
+    const publication = data.data
+    console.log(publication)
+    
 
-    const [publication, setPublication] = useState([])
-
-    useEffect(() => {
-        fetch("http://localhost:8000/publication/")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setPublication(result)
-            }
-        )
-    }, [])
+    
     return(
         <section>
+            <SideBar />
+            <div className='publications'>
+            
+                {publication.map(p => (
+                    <Link to={`http://localhost:1337${p.attributes.text.data.attributes.url}`} key={p.id} target="_blank" rel="noopener noreferrer">
+                        <p> link</p>
+                    </Link>
+                ))}
+            </div>
+        </section>
+    )
+};
+
+export default Publications;
+
+
+{/*
+
+<section>
             <SideBar />
             <div className='publications'>
                 {publication.map(p => (
@@ -29,7 +45,5 @@ function Publications(){
                 
             </div>
         </section>
-    )
-};
 
-export default Publications;
+*/}

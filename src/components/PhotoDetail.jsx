@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { SRLWrapper } from "simple-react-lightbox";
 import SideBar from './SideBar';
+import useFetch from '../hooks/useFetch';
 
 
 
@@ -11,36 +12,20 @@ const options = {
     }}
 
 function PhotoDetail(props){
-    const [photo, setPhoto] = useState([]) //tittle, first photo
-    const [album, setAlbum] = useState([])
+    //const [photo, setPhoto] = useState([]) //tittle, first photo
+    //const [album, setAlbum] = useState([])
     let { id } = useParams()
-    
 
-    //let url = `http://localhost:8000/photo/${id}/`
 
-    //this allows fetch photo from album
-    useEffect(() => {
-        fetch(`http://localhost:8000/photo/${id}/`)
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setAlbum(result);
-            },
-        )
-    }, [])
+    const { loading, error, data } = useFetch(`http://localhost:1337/api/photos/${id}?populate=image`)
+    if (loading) return <p>loading...</p>
+    if (error) return <p>error</p>
+    const img = data.data
+    console.log(img)
 
-    //this allow to get tittle, description and first image of album
+   
 
-    useEffect(() => {
-        fetch("http://localhost:8000/photo/")
-        .then(res => res.json())
-        .then(
-            (photoResult) => {
-                setPhoto(photoResult);
-            },
-        )
-    }, [])
-
+    /*
     const tittleArray = photo.map(p => (
         p.tittle
     ))
@@ -63,29 +48,28 @@ function PhotoDetail(props){
 
     const firstPhoto = albumPhotoArrayOrder[id -1]
 
-    console.log(tittleArrayOrder)
+   */
 
     return(
         <section>
             <SideBar />
             <div className='album-web'>
                 <p id='album-tittle'><h3>
-                    {tittleArrayOrder[id - 1]}
+                    {img.attributes.title}
                     </h3></p>
                 <hr/>
                 <div className='album'>
                     <SRLWrapper options={options}>
                         <div className='album-detail'>
-                            <img className='album-photo'
-                                 src={`http://localhost:8000/${firstPhoto}/`} alt=''/>
-                            {album.map(a => (
+                            {img.attributes.image.data.map(i => (
                                 <img className='album-photo'
-                                src={`http://localhost:8000/${a.images}/`} alt=''/>
+                                src={`http://localhost:1337${i.attributes.url}`} alt=''/>
                             ))}
+                            
                         </div>
                     </SRLWrapper>
                         <div className='album-text'>
-                            {descriptionArrayOrder[id - 1]}
+                            {}
                         </div>
                 </div>
                 <hr className='bottom-hr'/>

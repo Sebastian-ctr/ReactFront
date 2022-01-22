@@ -1,36 +1,25 @@
 import React, { useEffect, useState} from 'react';
 import SideBar from './SideBar';
 import { Link } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
+
 
 function Text(){
-
-    const [text, setText] = useState([])
-
-    useEffect(() => {
-        fetch("http://localhost:8000/text/")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setText(result)
-                },
-            )
-    }, [])
+    const { loading, error, data } = useFetch('http://localhost:1337/api/texts')
+    if (loading) return <div className='loading'>loading...</div>
+    if (error) return <p className='loading'>error</p>
+    const text = data.data
+    console.log(text)
 
     return(
       <section>
           <SideBar />
           <div className='text'>
               {text.map(t => (
-                  <a href={"http://localhost:8000" + t.pdf} target="_blank">
-                      <h3>
-                          {t.tittle}
-                      </h3>
-                      <p>
-                          {t.text}
-                      </p>
-                  </a>
-              ))}
-
+                  <Link to={`/text/${t.id}`} key={t.id}>
+                  <p>{t.attributes.title}</p>
+                  </Link>
+              )) }
           </div>
       </section>  
     )

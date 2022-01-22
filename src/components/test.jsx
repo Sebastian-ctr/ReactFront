@@ -1,20 +1,13 @@
 import React, { useEffect, useState} from 'react';
 import SideBar from './SideBar';
 import { Link } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
 
 function Test(){
-
-    const [text, setText] = useState([])
-
-    useEffect(() => {
-        fetch("http://localhost:5000/")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setText(result)
-                },
-            )
-    }, [])
+    const { loading, error, data } = useFetch('http://localhost:1337/api/texts')
+    if (loading) return <p>loading...</p>
+    if (error) return <p>error</p>
+    const text = data.data.attributes
 
     return(
       <section>

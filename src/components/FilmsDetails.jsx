@@ -9,7 +9,7 @@ let sizeHeight = '315';
 
 function FilmsDetail() {
     let { id } = useParams()
-    const { loading, error, data } = useFetch(`http://localhost:1337/api/home-page?populate=image/${id}`)
+    const { loading, error, data } = useFetch(`http://localhost:1337/api/films/${id}`)
     if (loading) return <p>loading...</p>
     if (error) return <p>error</p>
     const movie = data.data.attributes
